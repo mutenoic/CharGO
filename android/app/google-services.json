@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1058838424138",
+    "project_id": "chargo-9b3af",
+    "storage_bucket": "chargo-9b3af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058838424138:android:e8fe17e9dfd61a81e614b3",
+        "android_client_info": {
+          "package_name": "com.denoic.chargo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058838424138-julhmpi8bfkdqr5vvkj0bjc18s4cpbqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZE7UIWaR-iKuKT_0lWTmav3sYzX33yCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058838424138-julhmpi8bfkdqr5vvkj0bjc18s4cpbqk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

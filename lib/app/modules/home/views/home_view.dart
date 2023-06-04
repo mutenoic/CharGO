@@ -18,24 +18,24 @@ class HomeView extends GetView<HomeController> {
 
       boxShadow: const [
         BoxShadow(
-          offset: Offset(0, 0),
-          color: Colors.black38,
+          offset: Offset(0, 15),
+          color: Colors.black26,
           blurRadius: 30,
-          spreadRadius: 20,
+          spreadRadius: 10,
         )
       ],
 
       velocity: 0.6,
 
       offset: const IDOffset.only(left: 0.5),
-      scale: const IDOffset.horizontal(0.5), // set the offset in both directions
+      scale: const IDOffset.horizontal(0.8), // set the offset in both directions
       proportionalChildArea: false, // default true
       borderRadius: 20, // default 0
       leftAnimationType: InnerDrawerAnimation.quadratic,
       backgroundDecoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
       ),
-      leftChild: Container(
+      rightChild: Container(
         color: Colors.transparent,
         child: Material(
           child: Column(
