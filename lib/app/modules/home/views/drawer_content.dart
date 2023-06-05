@@ -1,7 +1,9 @@
+import 'package:chargo/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
-class DrawerContent extends StatelessWidget {
+class DrawerContent extends GetView<HomeController> {
   const DrawerContent({super.key});
 
   @override
@@ -31,26 +33,11 @@ class DrawerContent extends StatelessWidget {
               flex: 2,
               child: Column(
                 children: [
-                  ListTile(
-                    selected: true,
-                    title: const Text("Hello world"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    selected: false,
-                    title: const Text("Hello world"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    selected: false,
-                    title: const Text("Hello world"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    selected: false,
-                    title: const Text("Hello world"),
-                    onTap: () {},
-                  )
+                  ContentTile("Карти", const Icon(Icons.map), 0, starterTile: true),
+                  ContentTile("Профил", const Icon(Icons.person), 1),
+                  ContentTile("Карти", const Icon(Icons.map), 2),
+                  ContentTile("Карти", const Icon(Icons.map), 3),
+                  ContentTile("Карти", const Icon(Icons.map), 4),
                 ],
               ),
             ),
@@ -60,6 +47,40 @@ class DrawerContent extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget ContentTile(String title, Icon icon, int index, {bool starterTile = false}) {
+    return Obx(
+      () => ListTile(
+        leading: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (starterTile)
+              AnimatedSlide(
+                offset: Offset(-1, controller.selectedPageIndex.value.toDouble()),
+                duration: const Duration(milliseconds: 600),
+                curve: Curves.easeOutExpo,
+                child: Container(
+                  width: 5,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Theme.of(Get.context!).colorScheme.primary,
+                  ),
+                ),
+              ),
+            const SizedBox(
+              width: 5,
+            ),
+            icon,
+          ],
+        ),
+        selected: controller.selectedPageIndex.value == index,
+        title: Text(title),
+        onTap: () {
+          controller.selectedPageIndex.value = index;
+        },
       ),
     );
   }
