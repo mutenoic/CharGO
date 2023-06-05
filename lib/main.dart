@@ -26,6 +26,7 @@ class App extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
         systemNavigationBarColor: Colors.transparent,
         systemStatusBarContrastEnforced: false,
         systemNavigationBarContrastEnforced: false,
