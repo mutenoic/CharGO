@@ -44,6 +44,12 @@ class App extends StatelessWidget {
           seedColor: Colors.deepPurple[900]!,
           brightness: Brightness.light,
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
       ),
     );
   }

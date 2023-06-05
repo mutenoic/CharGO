@@ -2,7 +2,6 @@ import 'package:chargo/app/modules/home/views/drawer_content.dart';
 import 'package:chargo/app/modules/home/views/main_screen_view.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:inner_drawer/inner_drawer.dart';
@@ -18,7 +17,7 @@ class HomeView extends GetView<HomeController> {
       children: [
         InnerDrawer(
           key: controller.innerDrawerKey,
-          onTapClose: true, // default false
+          onTapClose: true,
           colorTransitionChild: Colors.transparent,
           colorTransitionScaffold: Colors.transparent,
           boxShadow: const [
@@ -44,13 +43,7 @@ class HomeView extends GetView<HomeController> {
         Obx(() {
           var dontHaveInternet = controller.connectivityStatus.value != ConnectivityResult.wifi &&
               controller.connectivityStatus.value != ConnectivityResult.mobile;
-          print("STATUS CONNECTIVITY OBX: ${controller.connectivityStatus.value}");
 
-          if (dontHaveInternet) {
-            SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light));
-          } else {
-            SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark));
-          }
           return AnimatedSlide(
             duration: const Duration(milliseconds: 300),
             offset: dontHaveInternet ? Offset.zero : const Offset(0, -1),

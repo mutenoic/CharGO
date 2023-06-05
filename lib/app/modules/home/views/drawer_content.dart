@@ -38,12 +38,12 @@ class DrawerContent extends GetView<HomeController> {
                   ContentTile("Карти", const Icon(Icons.map), 2),
                   ContentTile("Карти", const Icon(Icons.map), 3),
                   ContentTile("Карти", const Icon(Icons.map), 4),
+                  const SizedBox(
+                    height: 150,
+                  ),
+                  ContentTile("Карти", const Icon(Icons.map), 5),
                 ],
               ),
-            ),
-            Flexible(
-              flex: 1,
-              child: Container(),
             ),
           ],
         ),
@@ -57,9 +57,10 @@ class DrawerContent extends GetView<HomeController> {
         leading: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (starterTile)
-              AnimatedSlide(
-                offset: Offset(-1, controller.selectedPageIndex.value.toDouble()),
+            if (true)
+              AnimatedScale(
+                // offset: Offset(-1, controller.selectedPageIndex.value.toDouble()),
+                scale: controller.selectedPageIndex.value == index ? 1 : 0,
                 duration: const Duration(milliseconds: 600),
                 curve: Curves.easeOutExpo,
                 child: Container(

@@ -6,7 +6,7 @@ import 'package:chargo/app/services/geo_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:platform_maps_flutter/platform_maps_flutter.dart';
 import 'package:snapping_sheet_2/snapping_sheet.dart';
 
 class MainScreen extends GetView<MainScreenController> {
@@ -120,7 +120,7 @@ class MainScreen extends GetView<MainScreenController> {
               child: ChargerSheet(),
             ),
             child: MapSwitcher(
-              child: GoogleMap(
+              child: PlatformMap(
                 myLocationEnabled: true,
                 initialCameraPosition: CameraPosition(
                   target: snapshot.data ?? const LatLng(50, 50),
