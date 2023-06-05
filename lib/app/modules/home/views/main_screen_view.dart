@@ -19,6 +19,7 @@ class MainScreen extends GetView<MainScreenController> {
     Get.lazyPut(() => MainScreenController());
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
@@ -31,22 +32,7 @@ class MainScreen extends GetView<MainScreenController> {
         centerTitle: true,
         toolbarHeight: 60,
         leadingWidth: 60,
-        leading: Obx(() {
-          return AnimatedScale(
-            scale: controller.sheetSize.value > 600 ? 0 : 1,
-            duration: const Duration(milliseconds: 250),
-            curve: Curves.easeOutQuint,
-            child: IconButton.filled(
-              padding: const EdgeInsets.all(10),
-              alignment: Alignment.center,
-              onPressed: () => Get.find<HomeController>().toggleDrawer(),
-              icon: const Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
-            ),
-          );
-        }),
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder(
         future: GeoService.getLocation(),
@@ -129,7 +115,10 @@ class MainScreen extends GetView<MainScreenController> {
               ),
             ),
             sheetBelow: SnappingSheetContent(
-                childScrollController: controller.scrollController, draggable: (p0) => true, child: ChargerSheet()),
+              childScrollController: controller.scrollController,
+              draggable: (p0) => true,
+              child: ChargerSheet(),
+            ),
             child: MapSwitcher(
               child: GoogleMap(
                 myLocationEnabled: true,
@@ -148,6 +137,37 @@ class MainScreen extends GetView<MainScreenController> {
           );
         },
       ),
+      floatingActionButton: Obx(() => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AnimatedScale(
+                  scale: controller.sheetSize.value > 550 ? 0 : 1,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeOutQuint,
+                  child: FloatingActionButton(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                    onPressed: () => Get.find<HomeController>().toggleDrawer(),
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    child: const Icon(Icons.menu, color: Colors.white),
+                  ),
+                ),
+                AnimatedScale(
+                  scale: controller.sheetSize.value > 550 ? 0 : 1,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeOutQuint,
+                  child: FloatingActionButton(
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    child: const Icon(Icons.navigation, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
       // bottomSheet: ChargerSheet(),
     );
   }
