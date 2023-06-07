@@ -1,5 +1,4 @@
 import 'package:chargo/app/modules/home/views/drawer_content.dart';
-import 'package:chargo/app/modules/home/views/main_screen_view.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +9,7 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => HomeController());
@@ -38,7 +38,10 @@ class HomeView extends GetView<HomeController> {
             color: Theme.of(context).colorScheme.surface,
           ),
           leftChild: const DrawerContent(),
-          scaffold: const MainScreen(),
+          scaffold: Obx(() => AnimatedSwitcher(
+                duration: const Duration(milliseconds: 600),
+                child: controller.pages[controller.selectedPageIndex.value],
+              )),
         ),
         Obx(() {
           var dontHaveInternet = controller.connectivityStatus.value != ConnectivityResult.wifi &&
