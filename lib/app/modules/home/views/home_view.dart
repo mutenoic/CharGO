@@ -16,39 +16,41 @@ class HomeView extends GetView<HomeController> {
     Get.lazyPut(() => HomeController());
     return Stack(
       children: [
-        InnerDrawer(
-          key: controller.innerDrawerKey,
-          onTapClose: true,
-          colorTransitionChild: Colors.transparent,
-          colorTransitionScaffold: Colors.transparent,
-          boxShadow: const [
-            BoxShadow(
-              offset: Offset(0, 15),
-              color: Colors.black26,
-              blurRadius: 30,
-              spreadRadius: 10,
-            )
-          ],
-          offset: const IDOffset.only(left: 0.5),
-          scale: const IDOffset.horizontal(0.8), // set the offset in both directions
-          proportionalChildArea: false, // default true
-          borderRadius: 50, // default 0
-          leftAnimationType: InnerDrawerAnimation.static,
-          swipe: false,
-          backgroundDecoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
-          ),
-          leftChild: const DrawerContent(),
-          scaffold: Obx(
-            () => PageTransitionSwitcher(
-              duration: const Duration(milliseconds: 600),
-              transitionBuilder: (child, primaryAnimation, secondaryAnimation) => SharedAxisTransition(
-                animation: primaryAnimation,
-                secondaryAnimation: secondaryAnimation,
-                transitionType: SharedAxisTransitionType.vertical,
-                child: child,
+        Obx(
+          () => InnerDrawer(
+            key: controller.innerDrawerKey,
+            onTapClose: true,
+            colorTransitionChild: Colors.transparent,
+            colorTransitionScaffold: Colors.transparent,
+            boxShadow: const [
+              BoxShadow(
+                offset: Offset(0, 15),
+                color: Colors.black26,
+                blurRadius: 30,
+                spreadRadius: 10,
+              )
+            ],
+            offset: const IDOffset.only(left: 0.5),
+            scale: const IDOffset.horizontal(0.8), // set the offset in both directions
+            proportionalChildArea: false, // default true
+            borderRadius: 50, // default 0
+            leftAnimationType: InnerDrawerAnimation.static,
+            swipe: controller.selectedPageIndex != 0 ? true : false,
+            backgroundDecoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+            ),
+            leftChild: const DrawerContent(),
+            scaffold: Obx(
+              () => PageTransitionSwitcher(
+                duration: const Duration(milliseconds: 600),
+                transitionBuilder: (child, primaryAnimation, secondaryAnimation) => SharedAxisTransition(
+                  animation: primaryAnimation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.vertical,
+                  child: child,
+                ),
+                child: controller.pages[controller.selectedPageIndex.value],
               ),
-              child: controller.pages[controller.selectedPageIndex.value],
             ),
           ),
         ),

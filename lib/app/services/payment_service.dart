@@ -6,7 +6,11 @@ import 'package:get/get.dart';
 class PaymentService {
   bool isPaymentSuccessful = false;
 
-  final dio = Dio(BaseOptions(headers: {"Authorization": 'Bearer sk_test_51MhanZKvzgS8ZV7wHlCESt9HSkAnQVAiYi3NSwGS1D8XsreEM58h44fAULCDkFHt85gBIYi8fBULmgEq4JTd5zmB009B43jDFf', "Content-Type": "application/json"}));
+  final dio = Dio(BaseOptions(headers: {
+    "Authorization":
+        'Bearer sk_test_51MhanZKvzgS8ZV7wHlCESt9HSkAnQVAiYi3NSwGS1D8XsreEM58h44fAULCDkFHt85gBIYi8fBULmgEq4JTd5zmB009B43jDFf',
+    "Content-Type": "application/json"
+  }));
 
   Future<bool> makePayment({
     required String amount,
@@ -103,21 +107,23 @@ class PaymentService {
 void main() {
   final service = PaymentService();
 
-  final amount = '10.99';
-  final currency = 'USD';
-  final cardNumber = '4242424242424242';
-  final expirationMonth = '12';
-  final expirationYear = '2024';
-  final cvc = '123';
+  const amount = '10.99';
+  const currency = 'USD';
+  const cardNumber = '4242424242424242';
+  const expirationMonth = '12';
+  const expirationYear = '2024';
+  const cvc = '123';
 
-  service.makePayment(
+  service
+      .makePayment(
     amount: amount,
     currency: currency,
     cardNumber: cardNumber,
     expirationMonth: expirationMonth,
     expirationYear: expirationYear,
     cvc: cvc,
-  ).then((isPaymentSuccessful) {
+  )
+      .then((isPaymentSuccessful) {
     print('Payment result: ${isPaymentSuccessful ? 'Successful' : 'Failed'}');
   });
 }

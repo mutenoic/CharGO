@@ -9,7 +9,7 @@ class HomeController extends GetxController {
   final selectedPageIndex = 0.obs;
 
   final pages = [
-    MapScreen(),
+    const MapScreen(),
     const ProfileView(),
   ];
 
