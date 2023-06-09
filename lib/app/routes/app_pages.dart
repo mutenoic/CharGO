@@ -22,7 +22,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MAP,
-      page: () => const MapScreen(),
+      page: () => MapScreen(),
       binding: MapBinding(),
     ),
     GetPage(

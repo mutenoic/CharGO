@@ -15,11 +15,12 @@ dependencies:
   flutter_stripe: ^9.2.1
   geolocator: ^9.0.2
   google_maps_flutter: ^2.2.5
-  sliding_up_panel2: ^3.3.0+1
-  snapping_sheet_2: ^3.1.5
+  snapping_sheet: any 
   connectivity_plus: ^4.0.1
   platform_maps_flutter: ^1.0.2
   cloud_firestore: ^4.8.0
+  flutter_animate: ^4.1.1+1
+  animations: ^2.0.7
 
 dev_dependencies:
   flutter_lints: ^2.0.0

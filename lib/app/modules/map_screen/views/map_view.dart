@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:platform_maps_flutter/platform_maps_flutter.dart';
-import 'package:snapping_sheet_2/snapping_sheet.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 
 class MapScreen extends GetView<MapController> {
   const MapScreen({
@@ -76,24 +76,17 @@ class MapScreen extends GetView<MapController> {
             controller: controller.bottomController,
             snappingPositions: const [
               SnappingPosition.factor(
-                positionFactor: 0.25,
+                positionFactor: 0.3,
                 snappingCurve: Curves.elasticOut,
                 snappingDuration: Duration(milliseconds: 1000),
               ),
               SnappingPosition.factor(
-                positionFactor: 0.5,
+                positionFactor: 0.90,
                 snappingCurve: Curves.elasticOut,
                 snappingDuration: Duration(milliseconds: 1000),
-              ),
-              SnappingPosition.factor(
-                positionFactor: 0.9,
-                snappingCurve: Curves.elasticOut,
-                snappingDuration: Duration(milliseconds: 1000),
+                grabbingContentOffset: GrabbingContentOffset.bottom,
               ),
             ],
-            allowScrolling: ({biggestSnapPos = 0, currentDragDirection, currentPos = 0, details, smallestSnapPos = 0}) {
-              return true;
-            },
             onSheetMoved: (positionData) => controller.sheetSize.value = positionData.pixels,
             grabbingHeight: 50,
             grabbing: Container(
@@ -116,8 +109,8 @@ class MapScreen extends GetView<MapController> {
             ),
             sheetBelow: SnappingSheetContent(
               childScrollController: controller.scrollController,
-              draggable: (p0) => true,
-              child: ChargerSheet(),
+              draggable: true,
+              child: ChargerSheet(scrollController: controller.scrollController),
             ),
             child: MapSwitcher(
               child: PlatformMap(
@@ -130,7 +123,7 @@ class MapScreen extends GetView<MapController> {
                 myLocationButtonEnabled: false,
                 mapType: MapType.normal,
                 onMapCreated: (mapControl) {
-                  controller.mapControler.complete(mapControl);
+                  controller.mapControler = mapControl;
                 },
               ),
             ),
@@ -158,7 +151,7 @@ class MapScreen extends GetView<MapController> {
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.easeOutQuint,
                   child: FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () => controller.center(),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     child: const Icon(Icons.navigation, color: Colors.white),

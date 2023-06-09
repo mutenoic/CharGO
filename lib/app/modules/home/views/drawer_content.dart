@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:chargo/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
 class DrawerContent extends GetView<HomeController> {
@@ -33,16 +36,18 @@ class DrawerContent extends GetView<HomeController> {
               flex: 2,
               child: Column(
                 children: [
-                  ContentTile("Карти", const Icon(Icons.map), 0, starterTile: true),
+                  ContentTile("Карти", const Icon(Icons.map), 0),
                   ContentTile("Профил", const Icon(Icons.person), 1),
                   ContentTile("Карти", const Icon(Icons.map), 2),
                   ContentTile("Карти", const Icon(Icons.map), 3),
                   ContentTile("Карти", const Icon(Icons.map), 4),
-                  const SizedBox(
-                    height: 150,
-                  ),
-                  ContentTile("Карти", const Icon(Icons.map), 5),
                 ],
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              child: Container(
+                child: ContentTile("Карти", const Icon(Icons.map), 5),
               ),
             ),
           ],
@@ -51,26 +56,24 @@ class DrawerContent extends GetView<HomeController> {
     );
   }
 
-  Widget ContentTile(String title, Icon icon, int index, {bool starterTile = false}) {
+  Widget ContentTile(String title, Icon icon, int index) {
     return Obx(
       () => ListTile(
         leading: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (true)
-              AnimatedScale(
-                // offset: Offset(-1, controller.selectedPageIndex.value.toDouble()),
-                scale: controller.selectedPageIndex.value == index ? 1 : 0,
-                duration: const Duration(milliseconds: 600),
-                curve: Curves.easeOutExpo,
-                child: Container(
-                  width: 5,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Theme.of(Get.context!).colorScheme.primary,
-                  ),
+            AnimatedScale(
+              scale: controller.selectedPageIndex.value == index ? 1 : 0,
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.easeOutExpo,
+              child: Container(
+                width: 5,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Theme.of(Get.context!).colorScheme.primary,
                 ),
               ),
+            ),
             const SizedBox(
               width: 5,
             ),
@@ -81,6 +84,10 @@ class DrawerContent extends GetView<HomeController> {
         title: Text(title),
         onTap: () {
           controller.selectedPageIndex.value = index;
+          Timer(
+            300.ms,
+            () => controller.toggleDrawer(),
+          );
         },
       ),
     );

@@ -39,7 +39,7 @@ class ChargerTile extends StatelessWidget {
         child: Row(
           children: [
             Image(
-              image: plugs["5"] ?? const AssetImage(""),
+              image: plugs[charger.type] ?? const AssetImage(""),
               alignment: Alignment.center,
             ),
             const SizedBox(width: 30),

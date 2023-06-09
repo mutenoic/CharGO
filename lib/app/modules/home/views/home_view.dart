@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:chargo/app/modules/home/views/drawer_content.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +39,18 @@ class HomeView extends GetView<HomeController> {
             color: Theme.of(context).colorScheme.surface,
           ),
           leftChild: const DrawerContent(),
-          scaffold: Obx(() => AnimatedSwitcher(
-                duration: const Duration(milliseconds: 600),
-                child: controller.pages[controller.selectedPageIndex.value],
-              )),
+          scaffold: Obx(
+            () => PageTransitionSwitcher(
+              duration: const Duration(milliseconds: 600),
+              transitionBuilder: (child, primaryAnimation, secondaryAnimation) => SharedAxisTransition(
+                animation: primaryAnimation,
+                secondaryAnimation: secondaryAnimation,
+                transitionType: SharedAxisTransitionType.vertical,
+                child: child,
+              ),
+              child: controller.pages[controller.selectedPageIndex.value],
+            ),
+          ),
         ),
         Obx(() {
           var dontHaveInternet = controller.connectivityStatus.value != ConnectivityResult.wifi &&
