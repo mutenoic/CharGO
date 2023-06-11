@@ -1,13 +1,29 @@
-import 'dart:async';
-
+import 'package:chargo/app/modules/home/components/drawer_content_tile.dart';
 import 'package:chargo/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
 class DrawerContent extends GetView<HomeController> {
-  const DrawerContent({super.key});
+  DrawerContent({super.key});
+
+  final UserContent = [
+    const ContentTile(title: "Карти", icon: Icon(Icons.map), index: 0),
+    const ContentTile(title: "Карти", icon: Icon(Icons.map), index: 2),
+    const ContentTile(title: "Карти", icon: Icon(Icons.map), index: 3),
+    const ContentTile(title: "Карти", icon: Icon(Icons.map), index: 4),
+  ];
+
+  final UserSettings = [
+    const ContentTile(title: "Профил", icon: Icon(Icons.person), index: 1),
+    const ContentTile(title: "Излез", icon: Icon(Icons.logout), index: -1),
+  ];
+
+  final AnonContent = [
+    const ContentTile(title: "Карти", icon: Icon(Icons.map), index: 0),
+    const ContentTile(title: "Влез в акаунт", icon: Icon(Icons.login), index: 3),
+    const ContentTile(title: "Регистрирай акаунт", icon: Icon(Icons.app_registration), index: 3),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,61 +50,17 @@ class DrawerContent extends GetView<HomeController> {
             ),
             Flexible(
               flex: 2,
-              child: Column(
-                children: [
-                  ContentTile("Карти", const Icon(Icons.map), 0),
-                  ContentTile("Профил", const Icon(Icons.person), 1),
-                  ContentTile("Карти", const Icon(Icons.map), 2),
-                  ContentTile("Карти", const Icon(Icons.map), 3),
-                  ContentTile("Карти", const Icon(Icons.map), 4),
-                ],
-              ),
+              child: Column(children: UserContent),
             ),
             Flexible(
               flex: 1,
-              child: Container(
-                child: ContentTile("Карти", const Icon(Icons.map), 5),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: UserSettings,
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget ContentTile(String title, Icon icon, int index) {
-    return Obx(
-      () => ListTile(
-        leading: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AnimatedScale(
-              scale: controller.selectedPageIndex.value == index ? 1 : 0,
-              duration: const Duration(milliseconds: 600),
-              curve: Curves.easeOutExpo,
-              child: Container(
-                width: 5,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Theme.of(Get.context!).colorScheme.primary,
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            icon,
-          ],
-        ),
-        selected: controller.selectedPageIndex.value == index,
-        title: Text(title),
-        onTap: () {
-          controller.selectedPageIndex.value = index;
-          Timer(
-            300.ms,
-            () => controller.toggleDrawer(),
-          );
-        },
       ),
     );
   }

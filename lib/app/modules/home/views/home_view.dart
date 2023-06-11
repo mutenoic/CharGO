@@ -35,11 +35,11 @@ class HomeView extends GetView<HomeController> {
             proportionalChildArea: false, // default true
             borderRadius: 50, // default 0
             leftAnimationType: InnerDrawerAnimation.static,
-            swipe: controller.selectedPageIndex != 0 ? true : false,
+            swipe: controller.selectedPageIndex.value != 0 ? true : false,
             backgroundDecoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
             ),
-            leftChild: const DrawerContent(),
+            leftChild: DrawerContent(),
             scaffold: Obx(
               () => PageTransitionSwitcher(
                 duration: const Duration(milliseconds: 600),
