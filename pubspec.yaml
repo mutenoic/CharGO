@@ -22,6 +22,11 @@ dependencies:
   flutter_animate: ^4.1.1+1
   animations: ^2.0.7
   dio: ^5.2.0+1
+  image_picker: ^0.8.8
+  cached_network_image: ^3.2.3
+  firebase_auth: ^4.6.2
+  firebase_storage: ^11.2.2
+  crop_your_image: ^0.7.5
 
 dev_dependencies:
   flutter_lints: ^2.0.0
