@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chargo/app/modules/home/controllers/home_controller.dart';
+import 'package:chargo/app/services/profile_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -161,7 +162,7 @@ class ProfileView extends GetView<ProfileController> {
   Widget profileTextField({
     required String label,
     required TextEditingController controller,
-    required ProfileSettingsController profileController,
+    required ProfileController profileController,
     InputDecoration addedDecoration = const InputDecoration(),
     TextInputType type = TextInputType.text,
     List<TextInputFormatter> formatters = const [],
@@ -206,7 +207,7 @@ class ProfileView extends GetView<ProfileController> {
             stream:
                 FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
             builder: (context, snapshot) => FutureBuilder(
-              future: FirestoreProfileService.getUserData(),
+              future: ProfileService().getProfileInfo(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData || snapshot.hasError) {
                   return const CircularProgressIndicator();
