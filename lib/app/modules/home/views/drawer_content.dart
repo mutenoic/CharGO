@@ -37,7 +37,6 @@ class DrawerContent extends GetView<HomeController> {
               child: Column(
                 children: [
                   ContentTile("Карти", const Icon(Icons.map), 0),
-                  ContentTile("Профил", const Icon(Icons.person), 1),
                   ContentTile("Карти", const Icon(Icons.map), 2),
                   ContentTile("Карти", const Icon(Icons.map), 3),
                   ContentTile("Карти", const Icon(Icons.map), 4),
@@ -46,8 +45,11 @@ class DrawerContent extends GetView<HomeController> {
             ),
             Flexible(
               flex: 1,
-              child: Container(
-                child: ContentTile("Карти", const Icon(Icons.map), 5),
+              child: Column(
+                children: [
+                  ContentTile("Профил", const Icon(Icons.person), 1),
+                  ContentTile("Излез", const Icon(Icons.logout), -1),
+                ],
               ),
             ),
           ],
