@@ -19,11 +19,6 @@ flutter pub get
 flutter run
 ```
 
-# Screenshots
-
-![](https://cdn.discordapp.com/attachments/949050363279990806/1105420196413460560/image.png)
-
-![](https://cdn.discordapp.com/attachments/949050363279990806/1105420105392853092/image.png)
 # Tech Stack
 
 **Client:** Flutter
