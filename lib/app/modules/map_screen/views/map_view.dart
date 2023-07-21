@@ -3,6 +3,7 @@ import 'package:chargo/app/modules/home/controllers/home_controller.dart';
 import 'package:chargo/app/modules/map_screen/controllers/map_controller.dart';
 import 'package:chargo/app/modules/map_screen/views/charger_sheet_view.dart';
 import 'package:chargo/app/services/geo_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -33,6 +34,23 @@ class MapScreen extends GetView<MapController> {
         toolbarHeight: 60,
         leadingWidth: 60,
         automaticallyImplyLeading: false,
+        actions: [
+          StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.data == null) return Container();
+
+              return Container(
+                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15)),
+                child: const Row(
+                  children: [
+                    Text("sgs"),
+                  ],
+                ),
+              );
+            },
+          )
+        ],
       ),
       body: FutureBuilder(
         future: GeoService.getLocation(),
@@ -131,9 +149,9 @@ class MapScreen extends GetView<MapController> {
         },
       ),
       floatingActionButton: Obx(() => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AnimatedScale(
                   scale: controller.sheetSize.value > 550 ? 0 : 1,
@@ -145,6 +163,9 @@ class MapScreen extends GetView<MapController> {
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     child: const Icon(Icons.menu, color: Colors.white),
                   ),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 AnimatedScale(
                   scale: controller.sheetSize.value > 550 ? 0 : 1,
@@ -160,7 +181,7 @@ class MapScreen extends GetView<MapController> {
               ],
             ),
           )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       // bottomSheet: ChargerSheet(),
     );
   }
