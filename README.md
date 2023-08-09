@@ -1,4 +1,3 @@
-![Screenshot_20230809-215716](https://github.com/mutenoic/CharGO/assets/51166786/a2c0fba7-e81a-4ba1-b2a9-9b3953ff771e)
 ![Logo](https://cdn.discordapp.com/attachments/1090445360859725864/1114492339923206154/chargo_no_bg.png)
 
 # CharGO
